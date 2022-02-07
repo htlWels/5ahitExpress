@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-app.post('/login',(req, res, next) => {
+router.post('/login',(req, res, next) => {
   passport.authenticate('local',{session:true}, (err,doMatch,info) =>{
       if (err) next(err)
 
