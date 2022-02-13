@@ -1,51 +1,39 @@
 <template>
-<div>
-    <Header 
-    name="Refr"
-    :errorMessage="errorMess"/>
-    
-    <Stundenplan 
-        v-if="loginState"
-      
-    />
-    <Login 
-      v-else 
-         @loginDone="loginEnabled" 
-        
-     />
-    
-</div>
+  <div>
+    <Header name="Refr" :errorMessage="errorMess" />
+
+    <Stundenplan v-if="loginState" />
+    <Login v-else @login="loginEnabled" />
+  </div>
 </template>
 
 <script>
-import Stundenplan from './components/Stundenplan.vue'
-import Header from './components/Header.vue'
-import Login from './components/Login.vue'
-import {ref} from 'vue'
-
-
+import Stundenplan from './components/Stundenplan.vue';
+import Header from './components/Header.vue';
+import Login from './components/Login.vue';
+import { ref } from 'vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Stundenplan,
     Header,
-    Login
+    Login,
   },
   setup() {
+    let errorMess = ref('');
+    let loginState = ref(false);
 
-    let errorMess=ref('')
-    let loginState = ref(false)
-   
-
-
-
-
+    function loginEnabled(isAllowed) {
+      loginState.value = isAllowed;
+      console.log('App: loginState: ' + isAllowed);
+    }
     return {
       errorMess,
       loginState,
-    }
-  }
+      loginEnabled,
+    };
+  },
 };
 </script>
 
